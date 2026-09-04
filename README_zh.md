@@ -87,27 +87,12 @@ python train.py --config configs/iemocap_example.json --seed 1
 
 命令行中显式给出的选项会覆盖 `--config` 中的值。仓库内 JSON 文件目前是可运行示例，并非结果表所用配置的最终冻结版本。
 
-## 检查点推理
-
-对于使用 CFN-ESA 原始特征维度训练的检查点，只需合并 `.pkl`、检查点和训练配置
-（训练 JSON 或 `metrics.json`）即可评估。仓库内的 `*_cfnesa_raw.json` 保存了两套已经
-验证过的原始特征检查点架构：
-
-```bash
-python evaluate.py \
-  --checkpoint results/iemocap_raw/best_test.pt \
-  --config configs/iemocap_cfnesa_raw.json \
-  --cfn-pkl data/cfn_esa/iemocap_multimodal_features.pkl
-```
 
 ## 测试
 
 ```bash
 python -m pytest -q
 ```
-
-测试覆盖 OTOC 闭式核、幺正相位旋转、复值状态归一化、Born 概率、填充不变性、反向
-梯度有限性、CFN-ESA 两类数据格式、原始特征约束、检查点兼容性和端到端推理。
 
 ## 引用
 
