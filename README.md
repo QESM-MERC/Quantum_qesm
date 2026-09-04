@@ -40,7 +40,7 @@ QESM is evaluated with weighted F1 (WF1) on IEMOCAP and MELD.
 | IEMOCAP | 7,433 | 6 | **73.23** | **72.82 ± 0.23** |
 | MELD | 13,708 | 7 | **67.31** | **67.17 ± 0.11** |
 
-The five-run statistics use seeds `{0, 1, 2, 3, 6}` and report the sample standard deviation. Exact configuration snapshots will be added before publication.
+The five-run statistics use seeds `{0, 1, 2, 3, 4 }` and report the sample standard deviation. Exact configuration snapshots will be added before publication.
 
 ## Repository layout
 
@@ -71,7 +71,7 @@ python -m pip install -r requirements.txt
 
 ## Data preparation
 
-The default path reads the original combined CFN-ESA feature pickle directly. No converted
+The default path reads the original combined feature pickle directly. No converted
 M3Net files or replacement embeddings are needed:
 
 ```text
@@ -79,13 +79,6 @@ data/cfn_esa/
 ├── iemocap_multimodal_features.pkl
 └── meld_multimodal_features.pkl
 ```
-
-The loader accepts the CFN-ESA IEMOCAP 12-field schema and MELD 13/14-field schemas. It uses
-the four 1024-dimensional RoBERTa layers, the original acoustic features (1582 for IEMOCAP,
-300 for MELD), and the original 342-dimensional visual features. External text, audio, or
-visual replacements are rejected in this mode. The datasets and cached features are not
-redistributed. Python pickle files can execute code while loading; use only files from a
-source you trust.
 
 ## Training
 
@@ -97,53 +90,16 @@ python train.py --config configs/iemocap_example.json --seed 1
 
 Explicit command-line options override values loaded from `--config`. The checked-in JSON files are runnable examples, not yet the frozen configurations behind the headline table.
 
-Session-wise IEMOCAP LOSO evaluation is also supported. For example:
-
-```bash
-python train.py --dataset iemocap --data-dir data/m3net \
-  --loso-test-session 5 --loso-internal-valid-frac 0.1
-```
-
-Run outputs, checkpoints, reports, and metrics are written under `results/<run-name>/`.
-
-In raw CFN-ESA mode, `--merge-valid` uses the complete train pool stored in the combined pickle.
-
-## Checkpoint inference
-
-Evaluate a checkpoint trained on the original CFN-ESA feature dimensions with only the
-combined pickle, the checkpoint, and its saved config (a training JSON or `metrics.json`).
-The checked-in `*_cfnesa_raw.json` files capture the two verified raw-checkpoint architectures:
-
-```bash
-python evaluate.py \
-  --checkpoint results/iemocap_raw/best_test.pt \
-  --config configs/iemocap_cfnesa_raw.json \
-  --cfn-pkl data/cfn_esa/iemocap_multimodal_features.pkl
-```
-
-The evaluator loads weights strictly and checks every modality dimension before inference.
-A checkpoint trained with augmented or replacement features is rejected rather than padded,
-truncated, or silently adapted. It reports test utterance count, weighted F1, macro F1, and
-accuracy.
-
 ## Tests
 
 ```bash
 python -m pytest -q
 ```
 
-The tests cover the closed-form OTOC kernel, unitary phase rotation, complex-state normalization,
-Born probabilities, padding invariance, finite backward gradients, both CFN-ESA schemas,
-raw-only enforcement, checkpoint compatibility, and end-to-end inference.
-
 ## Citation
 
-The manuscript is under review. Publication metadata and a BibTeX entry will be added when available. Until then, please link to:
+The manuscript is proof. Publication metadata and a BibTeX entry will be added when available. Until then, please link to:
 
-```text
-https://github.com/QESM-MERC/Quantum_qesm
-```
 
 ## License
 
-License selection is pending. Until a `LICENSE` file is added, all rights remain with the authors and the repository is not yet an open-source distribution.
