@@ -11,9 +11,7 @@
 [![Tests](https://github.com/QESM-MERC/Quantum_qesm/actions/workflows/ci.yml/badge.svg)](https://github.com/QESM-MERC/Quantum_qesm/actions/workflows/ci.yml)
 
 > [!IMPORTANT]
-> This initial release publishes the project overview first. Source code, frozen configurations,
-> raw-feature checkpoints, publication metadata, and the open-source license are being prepared
-> for the subsequent release.
+> This initial release publishes the project overview first. Source code are being prepared for the subsequent release.
 
 QESM is a classical PyTorch model inspired by quantum mathematical structures; it does not require quantum hardware. It represents text, audio, and visual utterance features as complex states, evolves them over dialogue context, models cross-modal perturbations, and performs a joint emotion measurement.
 
