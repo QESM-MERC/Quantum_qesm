@@ -11,7 +11,7 @@
 [![测试](https://github.com/QESM-MERC/Quantum_qesm/actions/workflows/ci.yml/badge.svg)](https://github.com/QESM-MERC/Quantum_qesm/actions/workflows/ci.yml)
 
 > [!IMPORTANT]
-> 当前先公开项目说明。源代码、冻结实验配置、原始特征检查点、论文元数据和开源许可证
+> 当前先公开项目说明。
 > 代码正在整理，将在后续版本中发布。
 
 QESM 是受量子数学结构启发、运行于经典硬件上的 PyTorch 模型，不需要量子计算机。它将文本、音频和视觉话语特征映射为复值状态，沿对话上下文演化这些状态，建模跨模态扰动，并进行联合情感测量。
