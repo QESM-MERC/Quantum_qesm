@@ -47,7 +47,7 @@ qotoc/          Core complex-valued QESM modules and model
 configs/        Versioned JSON examples for the training CLI
 dataset.py      IEMOCAP/MELD feature loading and split construction
 train.py        Training and evaluation entry point
-evaluate.py     Raw CFN-ESA checkpoint inference entry point
+evaluate.py     Raw checkpoint inference entry point
 tests/          Numerical and model-integration tests
 ```
 
@@ -73,18 +73,12 @@ The default path reads the original combined feature pickle directly. No convert
 M3Net files or replacement embeddings are needed:
 
 ```text
-data/cfn_esa/
+data/
 ├── iemocap_multimodal_features.pkl
 └── meld_multimodal_features.pkl
 ```
 
 ## Training
-
-```bash
-python train.py --dataset iemocap --cfn-pkl data/cfn_esa/iemocap_multimodal_features.pkl --epochs 80
-python train.py --dataset meld --cfn-pkl data/cfn_esa/meld_multimodal_features.pkl --epochs 40 --batch-size 32
-python train.py --config configs/iemocap_example.json --seed 1
-```
 
 Explicit command-line options override values loaded from `--config`. The checked-in JSON files are runnable examples, not yet the frozen configurations behind the headline table.
 
