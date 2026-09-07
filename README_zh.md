@@ -72,18 +72,13 @@ python -m pip install -r requirements.txt
 默认路径直接读取 CFN-ESA 提供的单个合并特征文件，不需要转换后的 M3Net 文件或替换特征：
 
 ```text
-data/cfn_esa/
+data/
 ├── iemocap_multimodal_features.pkl
 └── meld_multimodal_features.pkl
 ```
 
 ## 训练
 
-```bash
-python train.py --dataset iemocap --cfn-pkl data/cfn_esa/iemocap_multimodal_features.pkl --epochs 80
-python train.py --dataset meld --cfn-pkl data/cfn_esa/meld_multimodal_features.pkl --epochs 40 --batch-size 32
-python train.py --config configs/iemocap_example.json --seed 1
-```
 
 命令行中显式给出的选项会覆盖 `--config` 中的值。仓库内 JSON 文件目前是可运行示例，并非结果表所用配置的最终冻结版本。
 
